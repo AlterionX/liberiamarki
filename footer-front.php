@@ -16,7 +16,7 @@
 			</div>
 			<div class="site-info">
 				<div class="site-text">
-					Copyright &copy; 2016 I-Help Liberia | Legal | Contact Us | Terms of Use
+					Copyright &copy; 2016 I-Help Liberia | <a href="/index.php/legal">Legal</a> | Contact Us | Terms of Use
 				</div>
 			</div><!-- .site-info -->
 		</footer><!-- .site-footer -->

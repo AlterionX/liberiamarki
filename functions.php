@@ -14,183 +14,6 @@
  * @subpackage Mark_One
  * @since Mark I 1.0
  */
-
-/**
-*/
-
-/**
- * Adds options to the theme customizer, allowing for the addition of entries for the slideshow.
- */
-function mytheme_customize_register( $wp_customize ) {
-	/*Get all images into a list.*/
-	$query_images_args = array(
-		'post_type'      => 'attachment',
-		'post_mime_type' => 'image',
-		'post_status'    => 'inherit',
-		'posts_per_page' => - 1
-	);
-
-	$query_images = new WP_Query( $query_images_args );
-
-	$images = array();
-	foreach ( $query_images->posts as $image ) {
-		$images[] = wp_get_attachment_url( $image->ID );
-	}
-	
-	$query_posts_args = array(
-		'post_type'      => 'post',
-	);
-
-	$query_posts = new WP_Query( $query_posts_args );
-
-	$posts = array();
-	foreach ( $query_posts->posts as $post ) {
-		$posts[] = wp_get_attachment_url( $post->ID );
-	}
-	
-	/*Get all pages into a list*/
-	
-	/*Add section.*/
-	$wp_customize->add_section('marki-slideshow', array(
-		'title'=>__('Slideshow', 'marki'),
-		/*'priority'=>'1',*/
-		/*'active_callback'=>'is_front_page',/*Callback if only appears on specific page.*/
-		'description'=>__('Edit the slideshow that appears on the front page.', 'marki')
-	));
-	
-	/*Add options to the customize panel.*/
-	$wp_setting_def = array(
-		'default' => '#',
-		'type'=>'theme_mod'
-	);
-	
-	
-	$wp_customize->add_setting('marki-slideshow[1-title]', $wp_setting_def);
-	$wp_customize->add_control('1-title', array(
-			'label'			=> __( 'Title for the first slide.', 'marki' ),
-			'section'		=> 'marki-slideshow',
-			'type'			=> 'text',
-			'settings'		=> 'marki-slideshow[1-title]'
-		)
-	);
-	$wp_customize->add_setting('marki-slideshow[1-desc]', $wp_setting_def);
-	$wp_customize->add_control('1-desc', array(
-			'label'			=> __( 'Description of the first slide.', 'marki' ),
-			'section'		=> 'marki-slideshow',
-			'type'			=> 'textarea',
-			'settings'		=> 'marki-slideshow[1-desc]'
-		)
-	);
-	$wp_customize->add_setting('marki-slideshow[1-img]', $wp_setting_def);
-	$wp_customize->add_control('1-img', array(
-		'label'			=> __( 'Image to place within the first slide.', 'marki' ),
-		'section'		=> 'marki-slideshow',
-		'type'			=> 'select',
-		'settings'		=> 'marki-slideshow[1-img]',
-		'choices'		=> $images
-	));
-	$wp_customize->add_setting('marki-slideshow[1-link]', $wp_setting_def);
-	$wp_customize->add_control('1-link', array(
-		'label'			=> __( 'Image to place within the first slide.', 'marki' ),
-		'section'		=> 'marki-slideshow',
-		'type'			=> 'select',
-		'settings'		=> 'marki-slideshow[1-link]',
-		'choices'		=> $posts
-	));
-	
-	$wp_customize->add_setting('marki-slideshow[2-title]', $wp_setting_def);
-	$wp_customize->add_control('2-title', array(
-		'label'			=> __( 'Title for the second slide.', 'marki' ),
-		'section'		=> 'marki-slideshow',
-		'type'			=> 'text',
-		'settings'		=> 'marki-slideshow[2-title]'
-	));
-	$wp_customize->add_setting('marki-slideshow[2-desc]', $wp_setting_def);
-	$wp_customize->add_control('2-desc', array(
-		'label'			=> __( 'Description of the second slide.', 'marki' ),
-		'section'		=> 'marki-slideshow',
-		'type'			=> 'textarea',
-		'settings'		=> 'marki-slideshow[2-desc]'
-	));
-	$wp_customize->add_setting('marki-slideshow[2-img]', $wp_setting_def);
-	$wp_customize->add_control('2-img', array(
-		'label'			=> __( 'Image to place within the second slide.', 'marki' ),
-		'section'		=> 'marki-slideshow',
-		'type'			=> 'select',
-		'settings'		=> 'marki-slideshow[2-img]',
-		'choices'		=> $images
-	));
-	
-	$wp_customize->add_setting('marki-slideshow[3-title]', $wp_setting_def);
-	$wp_customize->add_control('3-title', array(
-		'label'			=> __( 'Title for the third slide.', 'marki' ),
-		'section'		=> 'marki-slideshow',
-		'type'			=> 'text',
-		'settings'		=> 'marki-slideshow[3-title]'
-	));
-	$wp_customize->add_setting('marki-slideshow[3-desc]',$wp_setting_def);
-	$wp_customize->add_control('3-desc', array(
-		'label'			=> __( 'Description of the third slide.', 'marki' ),
-		'section'		=> 'marki-slideshow',
-		'type'			=> 'textarea',
-		'settings'		=> 'marki-slideshow[3-desc]'
-	));
-	$wp_customize->add_setting('marki-slideshow[3-img]',$wp_setting_def);
-	$wp_customize->add_control('3-img', array(
-		'label'			=> __( 'Image to place within the third slide.', 'marki' ),
-		'section'		=> 'marki-slideshow',
-		'type'			=> 'select',
-		'settings'		=> 'marki-slideshow[3-img]',
-		'choices'		=> $images
-	));
-	
-	$wp_customize->add_setting('marki-slideshow[4-title]',$wp_setting_def);
-	$wp_customize->add_control('4-title', array(
-		'label'			=> __( 'Title for the fourth slide.', 'marki' ),
-		'section'		=> 'marki-slideshow',
-		'type'			=> 'text',
-		'settings'		=> 'marki-slideshow[4-title]'
-	));
-	$wp_customize->add_setting('marki-slideshow[4-desc]',$wp_setting_def);
-	$wp_customize->add_control('4-desc', array(
-		'label'			=> __( 'Description of the fourth slide.', 'marki' ),
-		'section'		=> 'marki-slideshow',
-		'type'			=> 'textarea',
-		'settings'		=> 'marki-slideshow[4-desc]'
-	));
-	$wp_customize->add_setting('marki-slideshow[4-img]',$wp_setting_def);
-	$wp_customize->add_control('4-img', array(
-		'label'			=> __( 'Image to place within the fourth slide.', 'marki' ),
-		'section'		=> 'marki-slideshow',
-		'type'			=> 'select',
-		'settings'		=> 'marki-slideshow[4-img]',
-		'choices'		=> $images
-	));
-	
-	$wp_customize->add_setting('marki-slideshow[5-title]',$wp_setting_def);
-	$wp_customize->add_control('5-title', array(
-		'label'			=> __( 'Title for the fifth slide.', 'marki' ),
-		'section'		=> 'marki-slideshow',
-		'type'		=> 'text',
-		'settings'		=> 'marki-slideshow[5-title]'
-	));
-	$wp_customize->add_setting('marki-slideshow[5-desc]',$wp_setting_def);
-	$wp_customize->add_control('5-desc', array(
-		'label'			=> __( 'Description of the fifth slide.', 'marki' ),
-		'section'		=> 'marki-slideshow',
-		'type'			=> 'textarea',
-		'settings'		=> 'marki-slideshow[5-desc]'
-	));
-	$wp_customize->add_setting('marki-slideshow[5-img]',$wp_setting_def);
-	$wp_customize->add_control('5-img', array(
-		'label'			=> __( 'Image to place within the fifth slide.', 'marki' ),
-		'section'		=> 'marki-slideshow',
-		'type'			=> 'select',
-		'settings'		=> 'marki-slideshow[5-img]',
-		'choices'		=> $images
-	));
-}
-add_action( 'customize_register', 'mytheme_customize_register' );
  
 /**
  * 
@@ -252,19 +75,22 @@ class front_nav_walker extends Walker_Nav_Menu
 	}
 }
 
+function image_size_reg() {
+    add_image_size( 'ed-size', 300, 200, array('top', 'left'));
+}
+add_action( 'init', 'image_size_reg' );
+ 
+function pw_show_image_sizes($sizes) {
+    return array_merge($sizes, array('ed-size' => __("Custom Large")));
+}
+add_filter('image_size_names_choose', 'pw_show_image_sizes');
+
 /**
  * Set the content width based on the theme.
  * @since Mark I 1.0
  */
 if (!isset($content_width)) {
 	$content_width=660;
-}
- 
-/**
- * Twenty Fifteen only works in WordPress 4.1 or later.
- */
-if ( version_compare( $GLOBALS['wp_version'], '4.1-alpha', '<' ) ) {
-	require get_template_directory() . '/inc/back-compat.php';
 }
 
 /**
@@ -392,15 +218,15 @@ function marki_scripts() {
 	//Custom fonts, style.css
 	wp_enqueue_style('marki-fonts',marki_fonts_link());
 	//Genericon, /genericons/genericons.css
-	wp_enqueue_style('genericons',get_template_directory_uri().'/genericons/genericons.css');
+	//wp_enqueue_style('genericons',get_template_directory_uri().'/genericons/genericons.css');
 	//Main css, /style.css
 	wp_enqueue_style('marki-style',get_stylesheet_uri());
 	//IE <9 style, only accessed if IE is used, /css/ie.css
-	wp_enqueue_style('marki-ie',get_template_directory_uri().'/css/ie.css',array('marki-style'));
-	wp_style_add_data('marki-ie','conditional','lt IE 9');
+	//wp_enqueue_style('marki-ie',get_template_directory_uri().'/css/ie.css',array('marki-style'));
+	//wp_style_add_data('marki-ie','conditional','lt IE 9');
 	//IE <8 style, same as above, /css/ie7.css
-	wp_enqueue_style('marki-ie7',get_template_directory_uri().'/css/ie7.css',array('marki-style'));
-	wp_style_add_data('marki-ie7','conditional','lt IE 8');
+	//wp_enqueue_style('marki-ie7',get_template_directory_uri().'/css/ie7.css',array('marki-style'));
+	//wp_style_add_data('marki-ie7','conditional','lt IE 8');
 	
 	//Script (javascript)
 	wp_enqueue_script('marki-script', get_template_directory_uri().'/js/functions.js',array('jquery'),null,true);
@@ -453,25 +279,6 @@ function marki_post_nav_background() {
 add_action( 'wp_enqueue_scripts', 'marki_post_nav_background' );
 
 /**
- * Display descriptions in main navigation.
- *
- * @since Mark I 1.0
- *
- * @param string  $item_output The menu item output.
- * @param WP_Post $item        Menu item object.
- * @param int     $depth       Depth of the menu.
- * @param array   $args        wp_nav_menu() arguments.
- * @return string Menu item with possible description.
- */
-function marki_nav_description( $item_output, $item, $depth, $args ) {
-	if ('primary'==$args->theme_location&&$item->description) {
-		$item_output=str_replace($args->link_after.'</a>','<div class="menu-item-description">'.$item->description.'</div>'.$args->link_after.'</a>',$item_output);
-	}
-	return $item_output;
-}
-add_filter('walker_nav_menu_start_el','marki_nav_description',10,4);
-
-/**
  * Add a `screen-reader-text` class to the search form's submit button.
  *
  * @since Mark I 1.0
@@ -483,13 +290,6 @@ function marki_search_form_modify( $html ) {
 	return str_replace( 'class="search-submit"', 'class="search-submit screen-reader-text"', $html );
 }
 add_filter( 'get_search_form', 'marki_search_form_modify' );
-
-/**
- * Implement the Custom Header feature.
- *
- * @since Mark I 1.0
- */
-require get_template_directory() . '/inc/custom-header.php';
 
 /**
  * Custom template tags for this theme.

@@ -6,6 +6,16 @@
 	<main id="main" class="site-main center-wrapper" role="main">
 		<div id="main-wrap" class="center-wrapped">
 			<?php get_header('entry'); ?>
+			<div id="three-tab-content-div" class="three-tab-head-content">
+				
+					<?php if (have_posts()) {
+						while(have_posts()) {
+							the_post();
+							the_content();
+						}
+					} ?>
+				
+			</div>
 			<div id="content-nav">
 				<button id="tab-one-button" class="tab-button"><?php echo the_field('tab_one_label'); ?></button>
 				<button id="tab-two-button" class="tab-button"><?php echo the_field('tab_two_label'); ?></button>
@@ -30,8 +40,10 @@
 <?php get_footer(); ?>
 
 <script>
+var seltab = "one";
+
 function heightMaximize() {
-	//alert(jQuery('body').height()+"||||||"+jQuery(window).height());
+	
 	if (jQuery('body').height() < jQuery(window).height()) {
 		jQuery('html').height(jQuery(window).height());
 		jQuery('body').css('overflow', "hidden");
@@ -41,14 +53,14 @@ function heightMaximize() {
 		var botmargin = 19.188;
 		jQuery('#entry-fancy-footer').css('height', (contentHeight-botmargin)+'px');
 		
-		//alert(JSON.stringify(jQuery('#entry-fancy-footer')));
-		//alert(contentHeight+"|"+headerHeight+"|"+content2Height+"|"+footerHeight);
-		
 		jQuery('#primary').height(contentHeight+'px');
 		jQuery('#content-footer-fancy').height('100%');
 	}
 };
 function tabSel(select) {
+	
+	seltab = select;
+	
 	jQuery('.tab-button').blur();
 	jQuery('.content-pane').css('visibility', "hidden");
 	jQuery('.tab-button').removeClass('selected-tab');
@@ -61,12 +73,12 @@ function tabSel(select) {
 	//alert(jQuery('#content-'+select+'-pane').height());
 	//alert(jQuery('#content').height()-110);
 	
-	if ((jQuery('#content').height()-110) < jQuery('#content-'+select+'-pane').height()) {
+	if ((jQuery('#content').height()-110) < jQuery('#content-'+select+'-pane').height()+jQuery('#three-tab-content-div').height() + 50) {
 		//alert("Resetting body height");
-		jQuery('html').height((jQuery('#content-'+select+'-pane').height()+335));
+		jQuery('html').height((jQuery('#content-'+select+'-pane').height()+jQuery('#three-tab-content-div').height()+385));
 		//alert("html set to height " + (jQuery('#content-'+select+'-pane').height()+335));
-		jQuery('body').height((jQuery('#content-'+select+'-pane').height()+335));
-		jQuery('#content').height((jQuery('content-'+select+'-pane').height()+110));
+		jQuery('body').height((jQuery('#content-'+select+'-pane').height()+jQuery('#three-tab-content-div').height()+385));
+		jQuery('#content').height((jQuery('content-'+select+'-pane').height()+jQuery('#three-tab-content-div').height()+160));
 	} else {
 		jQuery('html').height(jQuery(window).height());
 		jQuery('body').height(jQuery(window).height());

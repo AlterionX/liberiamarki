@@ -4,7 +4,7 @@ get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main center-wrapper" role="main">
-			<?php while ( have_posts() ) { the_post();
+			<?php while ( have_posts() ) { the_post(	);
 				// Include the page content template.
 				get_template_part( 'content', 'page' );
 				// If comments are open or we have at least one comment, load up the comment template.
@@ -17,7 +17,6 @@ get_header(); ?>
 
 <?php get_footer(); ?>
 
-<?php if (true) { ?>
 <script>
 jQuery('#entry-fancy-footer').ready(new function(){
 	//alert(jQuery('body').height()+"||||||"+jQuery(window).height());
@@ -40,4 +39,3 @@ jQuery('#entry-fancy-footer').ready(new function(){
 	}
 });
 </script>
-<?php } ?>

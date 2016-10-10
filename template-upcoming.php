@@ -11,7 +11,7 @@
 				$isEvent = true;
 				$pages = array();
 				$queryboard = new WP_Query(array(
-					'post_type'=>"post", 'category_name'=>"upcoming-post",
+					'post_type'=>"post", 'category_name'=>"event",
 					'meta_query'=>array('key'=>"event_date"),
 					'orderby' => "meta_value",
 					'meta_key' => "event_date",
@@ -40,6 +40,7 @@
 				//echo "PHASE ONE COMPLETE"."<br></br>";
 				
 				$pages_num = max( ceil(((count($queue)-intval(get_field('first_page_post_num')))/(intval(get_field('posts_per_page'))))+1),  1);
+				//echo intval(get_field('first_page_post_num'));
 				//echo $pages_num."<br></br>";
 				for($d = 0; $d < $pages_num; $d++) {
 					$temp = array();

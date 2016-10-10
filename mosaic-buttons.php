@@ -59,24 +59,22 @@
 																							echo $buttonRow;
 																							?>-component-<?php
 																												echo $sectCount;
-																												?>" class="mosaic-pane-row-component-spacer" href="<?php
-																																										echo get_sub_field('button_link');
-																																										?>" style="width:calc(<?php
-																																																	echo get_sub_field('width');
-																																																	?>% - 10px);background-color:<?php
-																																																									echo get_sub_field('background_color');
-																																																									?>;border:<?php
-																																																													if (get_sub_field('border_present')) {
-																																																														echo "solid";
-																																																													} else {
-																																																														echo "none";
-																																																													}?>;border-color:<?php 
-																																																																			if (get_sub_field('border_color')) {
-																																																																				echo get_sub_field('border_color');
-																																																																			} else {
-																																																																				echo "#000000";
-																																																																			}
-																																																																			?>"></div><?php
+																												?>" class="mosaic-pane-row-component-spacer" style="width:calc(<?php
+																																												echo get_sub_field('width');
+																																												?>% - 10px);background-color:<?php
+																																																				echo get_sub_field('background_color');
+																																																				?>;border:<?php
+																																																								if (get_sub_field('border_present')) {
+																																																									echo "solid";
+																																																								} else {
+																																																									echo "none";
+																																																								}?>;border-color:<?php 
+																																																														if (get_sub_field('border_color')) {
+																																																															echo get_sub_field('border_color');
+																																																														} else {
+																																																															echo "#000000";
+																																																														}
+																																																														?>"></div><?php
 													}
 													++$sectCount;
 												}

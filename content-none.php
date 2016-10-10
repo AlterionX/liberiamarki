@@ -4,9 +4,9 @@
  *
  * Learn more: {@link https://codex.wordpress.org/Template_Hierarchy}
  *
- * @package WordPress
- * @subpackage Twenty_Fifteen
- * @since Twenty Fifteen 1.0
+ * @package Liberia
+ * @subpackage Mark One
+ * @since Mark One 1.0
  */
 ?>
 

@@ -15,57 +15,6 @@
  * @param WP_Customize_Manager $wp_customize Customizer object.
  */
 function marki_customize_register( $wp_customize ) {
-	$color_scheme = marki_get_color_scheme();
-
-	$wp_customize->get_setting( 'blogname' )->transport        = 'postMessage';
-	$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
-
-	// Add color scheme setting and control.
-	$wp_customize->add_setting( 'color_scheme', array(
-		'default'           => 'default',
-		'sanitize_callback' => 'marki_sanitize_color_scheme',
-		'transport'         => 'postMessage',
-	) );
-
-	$wp_customize->add_control( 'color_scheme', array(
-		'label'    => __( 'Base Color Scheme', 'marki' ),
-		'section'  => 'colors',
-		'type'     => 'select',
-		'choices'  => marki_get_color_scheme_choices(),
-		'priority' => 1,
-	) );
-
-	// Add custom header and sidebar text color setting and control.
-	$wp_customize->add_setting( 'sidebar_textcolor', array(
-		'default'           => $color_scheme[4],
-		'sanitize_callback' => 'sanitize_hex_color',
-		'transport'         => 'postMessage',
-	) );
-
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'sidebar_textcolor', array(
-		'label'       => __( 'Header and Sidebar Text Color', 'marki' ),
-		'description' => __( 'Applied to the header on small screens and the sidebar on wide screens.', 'marki' ),
-		'section'     => 'colors',
-	) ) );
-
-	// Remove the core header textcolor control, as it shares the sidebar text color.
-	$wp_customize->remove_control( 'header_textcolor' );
-
-	// Add custom header and sidebar background color setting and control.
-	$wp_customize->add_setting( 'header_background_color', array(
-		'default'           => $color_scheme[1],
-		'sanitize_callback' => 'sanitize_hex_color',
-		'transport'         => 'postMessage',
-	) );
-
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'header_background_color', array(
-		'label'       => __( 'Header and Sidebar Background Color', 'marki' ),
-		'description' => __( 'Applied to the header on small screens and the sidebar on wide screens.', 'marki' ),
-		'section'     => 'colors',
-	) ) );
-
-	// Add an additional description to the header image section.
-	$wp_customize->get_section( 'header_image' )->description = __( 'Applied to the header on small screens and the sidebar on wide screens.', 'marki' );
 }
 add_action( 'customize_register', 'marki_customize_register', 11 );
 

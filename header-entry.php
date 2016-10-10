@@ -4,7 +4,7 @@
 
 ?>
 
-<?php if (get_field('header_present')) { ?>
+<?php if (get_field('fancy_header_present')) { ?>
 	<header class="entry-fancy-header">
 		<div id="content-header-fancy">
 			<div id="left-entry-header">

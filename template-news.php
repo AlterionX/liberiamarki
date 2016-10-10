@@ -7,9 +7,11 @@
 		<div id="main-wrap" class="center-wrapped">
 			<?php get_header('entry'); ?>
 			<?php
+				global $isEvent;
+				$isEvent = false;
 				$pages = array();
 				$queryboard = new WP_Query(array(
-					'post_type'=>"post", 'category_name'=>"news-post",
+					'post_type'=>"post", 'category_name'=>"news",
 					'meta_query'=>array('key'=>"written_date"),
 					'orderby' => "meta_value",
 					'meta_key' => "written_date",
@@ -42,7 +44,7 @@
 				for($d = 0; $d < $pages_num; $d++) {
 					$temp = array();
 					if ($d == 0) {
-						for ($i = 0; $i < intval(get_field('first_page_post_num')); $i++) {
+						for ($i = 0; $i <  min(intval(get_field('first_page_post_num')), $counter); $i++) {
 							$curr_ind = ($i+($d*intval(get_field('first_page_post_num'))));
 							//echo $curr_ind."<br></br>";
 							$temp[$i] = $queue[$curr_ind];
